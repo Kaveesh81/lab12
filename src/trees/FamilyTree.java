@@ -141,6 +141,8 @@ public class FamilyTree
 			throw new TreeException("Invalid line");
 		String parent = line.substring(0, colonIndex);
 		String childrenString = line.substring(colonIndex + 1);
+		// Extract parent and array of children.
+		
 		String[] childrenArray = childrenString.split(",");
 		
 		// Find parent node. If root is null then the tree is empty and the
@@ -164,6 +166,7 @@ public class FamilyTree
 			TreeNode child = new TreeNode(childrenArray[i]);
 			child.parent = parentNode;
 			parentNode.children.add(child);
+
 		}
 	}
 	
@@ -190,9 +193,12 @@ public class FamilyTree
 		
 		// Check members of ancestorsOf1 in order until you find a node that is also
 		// an ancestor of 2. 
-		for (TreeNode n1: ancestorsOf1)
-			if (ancestorsOf2.contains(n1))
+		for (TreeNode n1: ancestorsOf1) {
+			System.out.println(n1.toString());
+			if (ancestorsOf2.contains(n1)) {
 				return n1;
+			}
+		}
 		
 		// No common ancestor.
 		return null;
